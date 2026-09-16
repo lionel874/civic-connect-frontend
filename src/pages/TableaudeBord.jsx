@@ -1,0 +1,86 @@
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { API_URL } from '../api.js'
+import NavBar from '../components/NavBar.jsx'
+import '../style/TableauDeBord.css'
+
+function TableauDeBord() {
+  const [services, setServices] = useState([])
+  const [commandes, setCommandes] = useState([])
+
+  useEffect(() => {
+    async function chargerServices() {
+      const response = await fetch(`${API_URL}/services/`)
+      const data = await response.json()
+      setServices(data.resultats)
+    }
+
+    async function chargerCommandes() {
+      const response = await fetch(`${API_URL}/orders/`)
+      const data = await response.json()
+      setCommandes(data)
+    }
+
+    chargerServices()
+    chargerCommandes()
+  }, [])
+
+  async function supprimerService(id) {
+    await fetch(`${API_URL}/services/${id}`, { method: 'DELETE' })
+    setServices(services.filter((s) => s.id_s !== id))
+  }
+
+  async function supprimerCommande(id) {
+    await fetch(`${API_URL}/orders/${id}`, { method: 'DELETE' })
+    setCommandes(commandes.filter((c) => c.num_o !== id))
+  }
+
+  return (
+    <div className="dashboard-page">
+      <h1>Tableau de bord</h1>
+      <p className="dashboard-note">Affiche pour l'instant tous les services et commandes — filtrage par utilisateur à venir avec l'authentification</p>
+
+      <Link to="/publier" className="dashboard-publier">+ Publier un service</Link>
+
+      <div className="dashboard-section">
+        <h2>Services / produits</h2>
+        <div className="dashboard-liste">
+          {services.length === 0 && <p>Aucun service pour l'instant.</p>}
+          {services.map((service) => (
+            <div key={service.id_s} className="dashboard-card">
+              <div className="dashboard-card-infos">
+                <strong>{service.nom_s}</strong>
+                <span>{service.prix} FCFA — {service.categorie}</span>
+              </div>
+              <button className="dashboard-delete" onClick={() => supprimerService(service.id_s)}>
+                Supprimer
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="dashboard-section">
+        <h2>Commandes</h2>
+        <div className="dashboard-liste">
+          {commandes.length === 0 && <p>Aucune commande pour l'instant.</p>}
+          {commandes.map((commande) => (
+            <div key={commande.num_o} className="dashboard-card">
+              <div className="dashboard-card-infos">
+                <strong>{commande.titre_o}</strong>
+                <span>Quantité : {commande.quantite_o} — {commande.mte_total} FCFA</span>
+              </div>
+              <button className="dashboard-delete" onClick={() => supprimerCommande(commande.num_o)}>
+                Supprimer
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <NavBar />
+    </div>
+  )
+}
+
+export default TableauDeBord

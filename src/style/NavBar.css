@@ -1,0 +1,56 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.navbar a {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 11px 0;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  text-decoration: none;
+  text-align: center;
+  background: #fff;
+}
+
+.nav-accueil {
+  color: #1B4332;
+  border-color: #1B4332;
+}
+.nav-accueil:hover {
+  background: #1B4332;
+  color: #fff;
+}
+
+.nav-recherche {
+  color: #2C6E9E;
+  border-color: #2C6E9E;
+}
+.nav-recherche:hover {
+  background: #2C6E9E;
+  color: #fff;
+}
+
+.nav-signalement {
+  color: #B3261E;
+  border-color: #B3261E;
+}
+.nav-signalement:hover {
+  background: #B3261E;
+  color: #fff;
+}
+
+.nav-profil {
+  color: #C9962C;
+  border-color: #C9962C;
+}
+.nav-profil:hover {
+  background: #C9962C;
+  color: #fff;
+}
