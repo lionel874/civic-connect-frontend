@@ -22,7 +22,14 @@ function Connexion() {
     if (response.ok) {
       const data = await response.json()
       sauvegarderSession(data.access_token)
-      navigate('/tableau-de-bord')
+
+      // Redirection selon le rôle de l'utilisateur connecté
+      const role = localStorage.getItem('role')
+      if (role === 'admin') {
+        navigate('/admin')
+      } else {
+        navigate('/tableau-de-bord')
+      }
     } else {
       const erreur = await response.json()
       setMessage(`Erreur : ${erreur.detail}`)

@@ -12,13 +12,22 @@ function TableauDeBord() {
     async function chargerServices() {
       const response = await fetch(`${API_URL}/services/`)
       const data = await response.json()
-      setServices(data.resultats)
+      setServices(data.resultats ?? [])
     }
 
     async function chargerCommandes() {
-      const response = await fetch(`${API_URL}/orders/`)
-      const data = await response.json()
-      setCommandes(data)
+      const token = localStorage.getItem('token')
+      if (!token) return
+
+      const response = await fetch(`${API_URL}/orders/mes-commandes`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        const liste = Array.isArray(data) ? data : data.resultats ?? data.data ?? []
+        setCommandes(liste)
+      }
     }
 
     chargerServices()
@@ -26,20 +35,27 @@ function TableauDeBord() {
   }, [])
 
   async function supprimerService(id) {
-    await fetch(`${API_URL}/services/${id}`, { method: 'DELETE' })
+    const token = localStorage.getItem('token')
+    await fetch(`${API_URL}/services/${id}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}` },
+    })
     setServices(services.filter((s) => s.id_s !== id))
   }
 
   async function supprimerCommande(id) {
-    await fetch(`${API_URL}/orders/${id}`, { method: 'DELETE' })
+    const token = localStorage.getItem('token')
+    await fetch(`${API_URL}/orders/${id}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}` },
+    })
     setCommandes(commandes.filter((c) => c.num_o !== id))
   }
 
   return (
     <div className="dashboard-page">
       <h1>Tableau de bord</h1>
-      <p className="dashboard-note">Affiche pour l'instant tous les services et commandes — filtrage par utilisateur à venir avec l'authentification</p>
-
+      
       <Link to="/publier" className="dashboard-publier">+ Publier un service</Link>
 
       <div className="dashboard-section">
@@ -61,7 +77,7 @@ function TableauDeBord() {
       </div>
 
       <div className="dashboard-section">
-        <h2>Commandes</h2>
+        <h2>Mes commandes</h2>
         <div className="dashboard-liste">
           {commandes.length === 0 && <p>Aucune commande pour l'instant.</p>}
           {commandes.map((commande) => (

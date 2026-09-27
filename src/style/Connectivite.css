@@ -1,0 +1,145 @@
+.connectivite-page {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 24px 16px 100px;
+    font-family: Arial, sans-serif;
+}
+
+.connectivite-tab-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+}
+
+.connectivite-tab {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.connectivite-liste {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.connectivite-item {
+    background: white;
+    border-radius: 10px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+}
+
+.connectivite-item h3 {
+    margin: 0 0 4px;
+    font-size: 1rem;
+}
+
+.connectivite-item p {
+    margin: 0;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.connectivite-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    padding: 24px;
+}
+
+.connectivite-card h1 {
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+}
+
+.connectivite-subtitle {
+    text-align: center;
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.connectivite-field {
+    margin-bottom: 16px;
+}
+
+.connectivite-row {
+    display: flex;
+    gap: 12px;
+}
+
+.connectivite-row .connectivite-field {
+    flex: 1;
+}
+
+.connectivite-field label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+}
+
+.connectivite-field input,
+.connectivite-field select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.connectivite-submit {
+    width: 100%;
+    padding: 14px;
+    background: #1a5c4a;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.connectivite-message {
+    text-align: center;
+    margin-top: 16px;
+    color: #333;
+}
+
+.connectivite-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.connectivite-modal {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+}
+
+.connectivite-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
